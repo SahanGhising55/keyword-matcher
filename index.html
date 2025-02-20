@@ -38,13 +38,26 @@
     <script>
         let keywords = [];
 
-        // Load keywords from the external file
-        fetch('https://1drv.ms/u/c/47ad587e990ebcd4/Ecr0T2LGts9EvOQD57kknNQB-LJug-m6gg97lOvg6gXbNg?e=CC1c3I')
-    .then(response => response.text())
-    .then(text => {
-        eval(text); // Loads keywords dynamically
-    })
-    .catch(error => console.error("Failed to load keywords:", error));
+        // Fetch the first part of the keywords
+        fetch('https://raw.githubusercontent.com/SahanGhising55/keyword-matcher/refs/heads/main/keywords_part1.js')
+            .then(response => response.text())  // Get the raw text from the first file
+            .then(text1 => {
+                // Evaluate the first part of the file to make the 'keywords' available
+                eval(text1);
+
+                // Fetch the second part of the keywords
+                fetch('https://raw.githubusercontent.com/SahanGhising55/keyword-matcher/refs/heads/main/keywords_part2.js')
+                    .then(response => response.text())  // Get the raw text from the second file
+                    .then(text2 => {
+                        // Evaluate the second part of the file to append to 'keywords'
+                        eval(text2);
+
+                        // Now both parts of 'keywords' are combined
+                        console.log('Keywords loaded:', keywords.length);
+                    })
+                    .catch(error => console.error("Failed to load keywords part 2:", error));
+            })
+            .catch(error => console.error("Failed to load keywords part 1:", error));
 
         // Function to find matching keywords
         function findKeywords() {
