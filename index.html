@@ -18,15 +18,20 @@
     <h2>Matched Keywords:</h2>
     <div id="matched"></div>
 
-    <script src="keywords.js"></script>
 <script>
+    let keywords = [];
+
+    // Fetching the large JSON file
+    fetch('https://raw.githubusercontent.com/SahanGhising55/keyword-matcher/refs/heads/main/keywords.json')
+        .then(response => response.json())
+        .then(data => {
+            keywords = data;
+            console.log('Keywords loaded:', keywords.length);
+        })
+        .catch(error => console.error('Error loading keywords:', error));
+
     function findKeywords() {
         const inputField = document.getElementById('inputText');
-        if (!inputField) {
-            console.error("❌ Input field not found");
-            return;
-        }
-
         const inputText = inputField.value.toLowerCase();
         const matched = keywords.filter(word => inputText.includes(word.toLowerCase()));
 
