@@ -39,14 +39,14 @@
         let keywords = [];
 
         // Fetch the first part of the keywords
-        fetch('https://raw.githubusercontent.com/username/repository/branch/keywords_part1.js')
+        fetch('https://raw.githubusercontent.com/SahanGhising55/keyword-matcher/refs/heads/main/keywords_part1.js')
             .then(response => response.text())  // Get the raw text from the first file
             .then(text1 => {
                 // Evaluate the first part of the file to make the 'keywords' available
                 keywords = eval('(' + text1 + ')'); // Parse the array data
 
                 // Fetch the second part of the keywords
-                fetch('https://raw.githubusercontent.com/username/repository/branch/keywords_part2.js')
+                fetch('https://raw.githubusercontent.com/SahanGhising55/keyword-matcher/refs/heads/main/keywords_part2.js')
                     .then(response => response.text())  // Get the raw text from the second file
                     .then(text2 => {
                         // Merge the second part into the existing 'keywords' array
