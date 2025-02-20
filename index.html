@@ -19,33 +19,39 @@
     <div id="matched"></div>
 
     <script>
-        let keywords = ["apple", "banana", "laptop", "python", "amazon"]; // For testing
+    let keywords = [];
 
-        function findKeywords() {
-            const inputField = document.getElementById('inputText');
-            if (!inputField) {
-                console.error("❌ Input field not found");
-                return;
-            }
+    // Fetch keywords from keywords.json
+    fetch('keywords.json')
+        .then(response => response.json())
+        .then(data => keywords = data)
+        .catch(error => console.error('❌ Error loading keywords:', error));
 
-            const inputText = inputField.value.toLowerCase();
-            const matched = keywords.filter(word => inputText.includes(word.toLowerCase()));
-
-            const resultDiv = document.getElementById('matched');
-            resultDiv.innerHTML = '';
-
-            if (matched.length > 0) {
-                matched.forEach(keyword => {
-                    const span = document.createElement('span');
-                    span.className = 'keyword';
-                    span.textContent = keyword;
-                    resultDiv.appendChild(span);
-                });
-            } else {
-                resultDiv.textContent = 'No matching keywords found.';
-            }
+    function findKeywords() {
+        const inputField = document.getElementById('inputText');
+        if (!inputField) {
+            console.error("❌ Input field not found");
+            return;
         }
-    </script>
+
+        const inputText = inputField.value.toLowerCase();
+        const matched = keywords.filter(word => inputText.includes(word.toLowerCase()));
+
+        const resultDiv = document.getElementById('matched');
+        resultDiv.innerHTML = '';
+
+        if (matched.length > 0) {
+            matched.forEach(keyword => {
+                const span = document.createElement('span');
+                span.className = 'keyword';
+                span.textContent = keyword;
+                resultDiv.appendChild(span);
+            });
+        } else {
+            resultDiv.textContent = 'No matching keywords found.';
+        }
+    }
+</script>
 
 </body>
 </html>
