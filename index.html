@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Matcher</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        textarea { width: 100%; height: 100px; margin-bottom: 20px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        #results { margin-top: 20px; border: 1px solid #ccc; padding: 10px; }
+        .keyword { display: inline-block; background-color: #e0f7fa; padding: 5px 10px; margin: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Keyword Matcher</h2>
+    <p>Paste your sentence below and click "Find Keywords" to see matching keywords:</p>
+
+    <textarea id="inputText" placeholder="Paste your sentence here..."></textarea>
+    <button onclick="findKeywords()">Find Keywords</button>
+
+    <div id="results"><strong>Matched Keywords:</strong><div id="matched"></div></div>
+
+    <script>
+        let keywords = [];
+
+        // Load keywords from external JSON
+        fetch('keywords.json')
+            .then(response => response.json())
+            .then(data => keywords = data)
+            .catch(error => console.error('Error loading keywords:', error));
+
+        function findKeywords() {
+            const inputText = document.getElementById('inputText').value.toLowerCase();
+            const matched = keywords.filter(word => inputText.includes(word.toLowerCase()));
+
+            const resultDiv = document.getElementById('matched');
+            resultDiv.innerHTML = '';
+
+            if (matched.length > 0) {
+                matched.forEach(keyword => {
+                    const span = document.createElement('span');
+                    span.className = 'keyword';
+                    span.textContent = keyword;
+                    resultDiv.appendChild(span);
+                });
+            } else {
+                resultDiv.textContent = 'No matching keywords found.';
+            }
+        }
+    </script>
+</body>
+</html>
