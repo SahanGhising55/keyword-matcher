@@ -18,15 +18,8 @@
     <h2>Matched Keywords:</h2>
     <div id="matched"></div>
 
-    <script>
-    let keywords = [];
-
-    // Fetch keywords from keywords.json
-    fetch('keywords.json')
-        .then(response => response.json())
-        .then(data => keywords = data)
-        .catch(error => console.error('❌ Error loading keywords:', error));
-
+    <script src="keywords.js"></script>
+<script>
     function findKeywords() {
         const inputField = document.getElementById('inputText');
         if (!inputField) {
