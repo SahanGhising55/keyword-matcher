@@ -39,13 +39,12 @@
         let keywords = [];
 
         // Load keywords from the external file
-        fetch('https://1drv.ms/u/c/47ad587e990ebcd4/Ecr0T2LGts9EvOQD57kknNQB-LJug-m6gg97lOvg6gXbNg?e=UdiY4h')
-            .then(response => response.text())
-            .then(text => {
-                eval(text); // Converts JS text into a usable variable
-                console.log('Keywords loaded:', keywords.length);
-            })
-            .catch(error => console.error("Failed to load keywords:", error));
+        fetch('https://1drv.ms/u/c/47ad587e990ebcd4/Ecr0T2LGts9EvOQD57kknNQB-LJug-m6gg97lOvg6gXbNg?e=CC1c3I')
+    .then(response => response.text())
+    .then(text => {
+        eval(text); // Loads keywords dynamically
+    })
+    .catch(error => console.error("Failed to load keywords:", error));
 
         // Function to find matching keywords
         function findKeywords() {
